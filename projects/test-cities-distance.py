@@ -6,23 +6,6 @@ import ssl
 URL = "https://devw.github.io/supn/data/laposte_hexasmal.small.csv"
 
 
-def get_city_GCS(url=URL):
-    # TODO
-    # Write a function called get_city_GCS.
-    # INPUT
-    # The function must have one parameter, the URL that points to the cities' dataset.
-    # As an example consider the dataset available at this address "https://devw.github.io/supn/data/laposte_hexasmal.small.csv"
-    # OUTPUT
-    # The function must return a dictionary
-    # The dictionary's keys represent the cities' names and the value of each key the latitude and longitude of the city given as a key
-    # Example:
-    # {'London': '51.509865,-0.118092', 'Paris': '48.864716,2.349014'}
-    response = urlopen(url, context=ssl._create_unverified_context())
-    raw_data = response.read().decode('utf-8')
-    lines = [line.split(";") for line in raw_data.split("\r\n")][1:-1]
-    return {line[1]: line[5] for line in lines}
-
-
 def get_distance(lonLat_1, lonLat_2):
     """
     Calculate the great circle distance in kilometers between two points 
@@ -43,6 +26,22 @@ def get_distance(lonLat_1, lonLat_2):
     return c * r
 
 
+def get_city_GCS(url=URL):
+    # TODO
+    # Write a function called get_city_GCS.
+    # INPUT
+    # The function must have one parameter, the URL that points to the cities' dataset.
+    # As an example consider the dataset available at this address "https://devw.github.io/supn/data/laposte_hexasmal.small.csv"
+    # OUTPUT
+    # The function must return a dictionary
+    # The dictionary's keys represent the cities' names and the value of each key the latitude and longitude of the city given as a key
+    # Example:
+    # {'London': '51.509865,-0.118092', 'Paris': '48.864716,2.349014'}
+    response = urlopen(url, context=ssl._create_unverified_context())
+    raw_data = response.read().decode('utf-8')
+    return raw_data
+
+
 def get_distances_from(city):
     # TODO
     # Write a function called get_distances_from.
@@ -56,10 +55,6 @@ def get_distances_from(city):
     # {'ALLAN': 0.0, 'CHATEAUNEUF DU RHONE': 8.29215195136882, 'CHAMARET': 14.009638918175074, ... }
     city_dict = get_city_GCS()
     city_distances = dict()
-    lonLat_1 = city_dict[city]
-    for city in city_dict:
-        lonLat_2 = city_dict[city]
-        city_distances[city] = get_distance(lonLat_1, lonLat_2)
     return city_distances
 
 
@@ -73,7 +68,7 @@ def get_sorted_distance(distances):
     # Example
     # INPUT -> {'Rome': 100, 'Paris': 12, 'London': 40 }
     # OUTPUT -> {'Paris': 12, 'London': 40, 'Rome': 100}
-    return {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
+    return {}
 
 
 class Logger:

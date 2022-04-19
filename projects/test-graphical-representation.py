@@ -5,23 +5,22 @@ import unittest
 ###
 
 
-def get_plot_x_y(x, y):
+def get_plot_x_y():
     # Write a function called get_plot_x_y that returns the matplotlib.pyplot instance whitout showing the plot
     # The function must have two parameters.
     # The first parameter represents the x-coordinate
     # The second parameter represents the y-coordinate
-    plt.plot(x, y)
+    # TODO
     return plt
 
 
-def get_plot_x_y_title(x, y, title):
+def get_plot_x_y_title():
     # Write a function called get_plot_x_y_title that returns the matplotlib.pyplot instance whitout showing the plot
     # The function must have three parameters.
     # The 1st parameter represents the x-coordinate of the matplotlib.pyplot instance
     # The 2nd parameter represents the y-coordinate of the matplotlib.pyplot instance
     # The 3rd parameter represents the plot title of the matplotlib.pyplot instance
-    plt.plot(x, y)
-    plt.title(title)
+    # TODO
     return plt
 
 ### Testing ### 
