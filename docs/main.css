@@ -31,6 +31,10 @@ img.size-l {
     width: 90%;
 }
 
+img.size-xl {
+    width: 100%;
+}
+
 pre.blur {
     filter: blur(0.3rem);
     user-select: none;

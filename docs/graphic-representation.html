@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Graphical representation</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction">
+            <details>
+                <summary>Graphical representation</summary>
+                <h2>Introduction</h2>
+                <p>
+                    Graphical representations of data are fundamental for the understanding of scientific knowledge, as
+                    readers often rely on what the experts visually represent in their publications to understand the
+                    underlying data-set and interpret their potential scientific meaning. Figures and diagrams not only
+                    show the relevant data that support key research findings, but also provide visual information on
+                    the interactions among different operations required in scientific reasoning. Being able to
+                    adequately and precisely visualize data is also a pillar on which decisions can be made as proposed
+                    by different dashboards in the market.
+                </p>
+                <p>
+                    Data visualization has various purposes, such as to make abstract thinking on data series or sets
+                    more concrete and (mentally) manipulable, to help readers identify and evaluate some fea- tures of
+                    the data, to let users see the possible underlying trends, patterns, processes, mechanisms, etc. of
+                    the phenomena considered and studied. The way data are visualized can therefore have important
+                    epistemic implications for scientific knowledge, as data visualization is not an
+                    "interpretation-free" practice, i.e. a neutral process of data presentation in terms of scientific
+                    un- derstanding. There are indeed several ways to transform data into a visual format, each of them
+                    entailing different possibilities for data interpretation.
+                </p>
+                <img class="size-xl" src="./images/graphical-representation-tree.jpg" alt="" />
+            </details>
+        </article>
+        <article id="matplotlib">
+            <details>
+                <summary>Matplotlib</summary>
+                <div>
+                    <h2>Introduction</h2>
+                    <p>Matplotlib is a library for making two-dimensional plots in Python programming language.</p>
+                    <p>
+                        Matplotlib is designed with the philosophy that you should be able to create simple plots with
+                        just a few commands, or just one.
+                    </p>
+                    <h2>Matplotlib Version</h2>
+                    <pre><code class="python">
+python
+>>> import matplotlib
+>>> print(f"matplotlib version: {matplotlib.__version__}")
+                        </code>
+                    </pre>
+                    <h2>Installing/Updating an official release</h2>
+                    <pre><code class="python">
+python -m pip install -U matplotlib
+# -U, --upgrade Upgrade all packages to the newest available version
+                        </code>
+                    </pre>
+                    <h2>Dependencies</h2>
+                    <p>The Matplotlib python library requires a large number of dependencies:</p>
+                    <ul>
+                        <li>Python (>= 2.7 or >= 3.4)</li>
+                        <li>NumPy (>= 1.7.1)</li>
+                        <li>libpng (>= 1.2)</li>
+                        <li>cycler (>= 0.10)</li>
+                        <li>dateutil (>= 2.1)</li>
+                        <li>FreeType (>= 2.3)</li>
+                        <li>...</li>
+                    </ul>
+                </div>
+            </details>
+        </article>
+        <article id="Sample plots in Matplotlib">
+            <details>
+                <summary>Sample plots in Matplotlib</summary>
+                <h2>Introduction</h2>
+                <p>
+                    This section covers the basics of creating visualizations with Matplotlib, as well as some
+                    best-practices in using the package effectively.
+                </p>
+                <h2>How to draw an empty plot?</h2>
+                <pre><code class="python">
+import matplotlib.pyplot as plt
+plt.plot()
+plt.show()
+                </code></pre>
+                <h2>Line plot</h2>
+                <pre><code class="python">
+## Example 1
+import matplotlib.pyplot as plt
+x = [1, 2, 3, 4]
+y = [2, 1, 3, 3.2]
+plt.plot(x, y)
+plt.show()
+
+## Example 2
+import matplotlib.pyplot as plt
+from random import randint
+x = [num for num in range(20)]
+y = [randint(1, 10) for num in x]
+plt.plot(x, y)
+plt.show()
+
+## Example 3
+import matplotlib.pyplot as plt
+from random import randint
+x = [num for num in range(20)]
+y = [randint(1, 10) for num in x]
+plt.plot(x, y, '-o') 
+plt.xlabel('x label')
+plt.ylabel('y label')
+plt.title("y is a function of x")
+plt.show()
+                    </code></pre>
+                <h2>Save the Plot to a File</h2>
+                <pre><code class="python">
+import matplotlib.pyplot as plt
+x = [1, 2, 3, 4]
+y = [2, 1, 3, 3.2]
+plt.plot(x, y, '-xr') #plot red line
+
+plt.xlabel('x label')
+plt.ylabel('y label')
+plt.title("y is a function of x")
+
+plt.savefig("/tmp/my-plot.pdf") # you can change the image format
+
+plt.show()
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>NumPy</summary>
+                <h2>Introduction</h2>
+                <p>NumPy is a Python library used for scientific computing in Python programming language.</p>
+                <p>
+                    It provides various routines for operations on arrays, including sorting, selecting, I/O, discrete
+                    Fourier transforms, basic linear algebra, basic statistical operations, random simulation.
+                </p>
+                <h2>linspace</h2>
+                <p>
+                    The linspace command is an in-built function in Python's NumPy library. It is used to create an
+                    evenly spaced sequence in a specified interval.
+                </p>
+                <pre><code class="python">
+# Example 1
+import numpy as np
+x = np.linspace(0, 4 * np.pi, num = 100)
+y = np.sin(x)
+plt.plot(x, y)
+plt.xlabel('x label')
+plt.ylabel('sin(x)')
+plt.show()
+
+# Example 2 (Drawing two lines simultaneously on a canvas)
+import numpy as np
+x = np.linspace(0, 4 * np.pi, num = 100)
+plt.plot(x, np.sin(x))
+plt.plot(x, np.cos(x))
+plt.xlabel('x label')
+plt.legend() # Place a legend on the Axes
+plt.xlim(x[0], x[-1]) # set the x limits of the current axes
+plt.show()
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Bar Plot</summary>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Histogram</summary>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Pie Chart</summary>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Pillow</summary>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

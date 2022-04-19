@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arduino Project 2</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="basic-commands">
+            <details>
+                <summary>Basic commands</summary>
+                <h2>C Basic commands</h2>
+                <pre>
+                    <code class="C">
+// loop
+for (int num = 0; num < 10; num ++) {
+    // some code
+}
+
+// Ternary operator 
+// It is used to execute code based on the result of a binary condition.
+condition ? value_if_true : value_if_false
+
+                    </code>
+                </pre>
+                <h2>Arduino commands</h2>
+                <pre>
+                    <code class="C">
+// It configures a specific pin to behave either as an input or an output
+pinMode(PIN_LED, OUTPUT/INPUT); 
+
+// Write a HIGH or a LOW value to a digital pin.
+int PIN_NUMBER;
+digitalWrite(PIN_NUMBER, HIGH/LOW);
+
+// Pauses the program for the amount of time (in miliseconds) 
+// specified as parameter. 
+int one_sec = 1000; // 1 s = 1_000 ms
+delay(one_sec);
+
+// Establishes serial communication between your Arduino board 
+// and another device (computer).
+// 9600 -> baud rate (it determines the speed of communication over a data channel.)                   
+Serial.begin(9600);
+Serial.println("hello");
+                    </code>
+                </pre>
+            </details>
+        </article>
+        <article id="terminology">
+            <details>
+                <summary>Problem 1</summary>
+                <div>
+                    <p>Write a program that simulate a traffic light using an Arduino and LEDs.</p>
+                    <ul>
+                        <li>The green LED lights up for four seconds and turns off.</li>
+                        <li>The orange LED lights up for one second and turns off.</li>
+                        <li>Finally, the red LED lights up for five seconds and turns off.</li>
+                    </ul>
+                    <!-- https://www.youtube.com/watch?v=ECOgJh-d7VE&ab_channel=BasonTech -->
+                    <h3>Version 1</h3>
+                    <pre><code class="C">
+void setup()
+{
+    // Set pins 11, 12, 13 as output
+    pinMode(11, OUTPUT);
+    pinMode(12, OUTPUT);
+    pinMode(13, OUTPUT);
+
+    // Set all output to LOW in order to turn all LEDs off
+    digitalWrite(11, LOW);
+    digitalWrite(12, LOW);
+    digitalWrite(13, LOW);
+}
+
+void loop()
+{
+    // Green
+    digitalWrite(13, HIGH);
+    delay(4000);
+    digitalWrite(13, LOW);
+
+    // Orange / Yellow
+    digitalWrite(12, HIGH);
+    delay(1000);
+    digitalWrite(12, LOW);
+
+    // Red
+    digitalWrite(11, HIGH);
+    delay(5000);
+    digitalWrite(11, LOW);
+}
+                    </code></pre>
+                    <h3>Version 2</h3>
+                    <pre class=""><code class="C">
+const int PIN_RED = 11;
+const int PIN_YELLOW = 12;
+const int PIN_GREEN = 13;
+
+const int DELAY_RED = 5000;
+const int DELAY_YELLOW = 1000;
+const int DELAY_GREEN = 4000;
+                        
+void setup()
+{
+    // Set pin 8 t/m 10 as output
+    pinMode(PIN_RED, OUTPUT);
+    pinMode(PIN_YELLOW, OUTPUT);
+    pinMode(PIN_GREEN, OUTPUT);
+    allOff();
+}
+
+void loop()
+{
+    toggleLED(PIN_GREEN, DELAY_GREEN);
+    toggleLED(PIN_YELLOW, DELAY_YELLOW);
+    toggleLED(PIN_RED, DELAY_RED);
+}
+                        
+// Toggles the given LED with the given delay
+void toggleLED(int led_pin, int led_delay)
+{
+    digitalWrite(led_pin, HIGH);
+    delay(led_delay);
+    digitalWrite(led_pin, LOW);
+}
+                        
+// Set all output to LOW in order to turn all LEDs off
+void allOff()
+{
+    digitalWrite(PIN_RED, LOW);
+    digitalWrite(PIN_YELLOW, LOW);
+    digitalWrite(PIN_GREEN, LOW);
+}
+                        </code>
+                    </pre>
+                </div>
+            </details>
+            <details style="display: none">
+                <!-- https://www.tinkercad.com/things/kE4AcTWcbKd-funky-crift/editel?tenant=circuits -->
+                <summary>Problem A</summary>
+                <p>
+                    1) Make the following assembly with 6 LEDs. 2) Write a program that turns on the Led producing
+                    different sequence patterns as shown below figure.
+                </p>
+                <img src="images/led-prob-2.jpg" alt="" />
+                <pre>
+        <code class="C">
+const int led1Pin = 12;
+const int led2Pin = 13;
+int switchVal = false;
+
+void setup() {
+    pinMode(led1Pin, OUTPUT);
+    pinMode(led2Pin, OUTPUT);
+    Serial.begin(9600);
+}
+
+void turn_off() {
+    digitalWrite(led2Pin, LOW);
+    digitalWrite(led1Pin, LOW);
+}
+
+void loop() {
+    Serial.println(switchVal);
+    switchVal = !switchVal;
+    turn_off();
+    
+    if (switchVal) {
+        digitalWrite(led1Pin, HIGH);
+        delay(1000);
+    }
+    
+    else {
+        digitalWrite(led2Pin, HIGH);
+        delay(1000);
+    }
+}
+        </code>
+    </pre>
+                <pre><code class="C">
+const int led1Pin = 12;
+const int led2Pin = 13;
+int switchVal = false;
+
+void setup() {
+    pinMode(led1Pin, OUTPUT);
+    pinMode(led2Pin, OUTPUT);
+    Serial.begin(9600);
+}
+
+void turn_off() {
+    digitalWrite(led2Pin, LOW);
+    digitalWrite(led1Pin, LOW);
+}
+
+void loop() {
+    Serial.println(switchVal);
+    switchVal = !switchVal;
+    turn_off();
+    
+    digitalWrite(switchVal ? led1Pin: led2Pin, HIGH);
+
+    delay(1000);
+}
+                </code></pre>
+                <img src="images/prj-1-1.jpg" alt="" />
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Problem A-B-C-D</summary>
+                <p>1) Make the following assembly with 6 LEDs.</p>
+                <img src="./images/schematic-view.jpg" alt="" />
+                <img class="" src="images/schematic-view-solution.jpg" alt="" />
+                <p>
+                    2) Write a program that turns on the Led producing different sequence patterns as shown below
+                    figure.
+                </p>
+                <img src="images/led-lights.jpg" alt="" />
+                <pre class="">
+        <code class="C">
+// C++ code
+//  
+
+void setup() {
+    for ( int pin = 2; pin < 8; pin++) pinMode(pin, OUTPUT);
+}
+
+void reset() {
+    for ( int pin = 2; pin < 8; pin++) digitalWrite(pin, LOW);
+}
+
+void alternate() {
+    for ( int pin = 0; pin < 2; pin++) {
+        reset();
+        digitalWrite(2 + pin, HIGH);
+        digitalWrite(4 + pin, HIGH);
+        digitalWrite(6 + pin, HIGH);
+        delay(1000);
+    }
+}
+
+
+void forward() {
+    for ( int pin = 2; pin < 8; pin++) {
+        reset();
+        digitalWrite(pin, HIGH);
+        delay(1000);
+    }
+}
+
+void backward() {
+    for ( int pin = 6; pin > 2; pin--) {
+        reset();
+        digitalWrite(pin, HIGH);
+        delay(1000);
+    }
+}
+
+void move_away() {
+    for ( int pin = 0; pin < 3; pin++) {
+        reset();
+        digitalWrite(2 + pin, HIGH);
+        digitalWrite(7 - pin, HIGH);
+        delay(1000);
+    }
+}
+
+void get_closer() {
+    for ( int pin = 0; pin < 3; pin++) {
+        reset();
+        digitalWrite(4 - pin, HIGH);
+        digitalWrite(5 + pin, HIGH);
+        delay(1000);
+    }
+}
+
+
+void loop() {
+    // A
+    alternate();
+
+    //B
+    // forward();
+
+    //C
+    // forward();
+    // backward();
+
+    // D
+    // move_away();
+    // get_closer();
+}
+        </code>
+        </pre>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+
