@@ -65,7 +65,7 @@ Serial.println("hello");
                     </ul>
                     <!-- https://www.youtube.com/watch?v=ECOgJh-d7VE&ab_channel=BasonTech -->
                     <h3>Version 1</h3>
-                    <pre><code class="C">
+                    <pre class="blur"><code class="C">
 void setup()
 {
     // Set pins 11, 12, 13 as output
@@ -98,7 +98,7 @@ void loop()
 }
                     </code></pre>
                     <h3>Version 2</h3>
-                    <pre class=""><code class="C">
+                    <pre class="blur"><code class="C">
 const int PIN_RED = 11;
 const int PIN_YELLOW = 12;
 const int PIN_GREEN = 13;
@@ -211,95 +211,6 @@ void loop() {
 }
                 </code></pre>
                 <img src="images/prj-1-1.jpg" alt="" />
-            </details>
-        </article>
-        <article>
-            <details>
-                <summary>Problem A-B-C-D</summary>
-                <p>1) Make the following assembly with 6 LEDs.</p>
-                <img src="./images/schematic-view.jpg" alt="" />
-                <img class="" src="images/schematic-view-solution.jpg" alt="" />
-                <p>
-                    2) Write a program that turns on the Led producing different sequence patterns as shown below
-                    figure.
-                </p>
-                <img src="images/led-lights.jpg" alt="" />
-                <pre class="">
-        <code class="C">
-// C++ code
-//  
-
-void setup() {
-    for ( int pin = 2; pin < 8; pin++) pinMode(pin, OUTPUT);
-}
-
-void reset() {
-    for ( int pin = 2; pin < 8; pin++) digitalWrite(pin, LOW);
-}
-
-void alternate() {
-    for ( int pin = 0; pin < 2; pin++) {
-        reset();
-        digitalWrite(2 + pin, HIGH);
-        digitalWrite(4 + pin, HIGH);
-        digitalWrite(6 + pin, HIGH);
-        delay(1000);
-    }
-}
-
-
-void forward() {
-    for ( int pin = 2; pin < 8; pin++) {
-        reset();
-        digitalWrite(pin, HIGH);
-        delay(1000);
-    }
-}
-
-void backward() {
-    for ( int pin = 6; pin > 2; pin--) {
-        reset();
-        digitalWrite(pin, HIGH);
-        delay(1000);
-    }
-}
-
-void move_away() {
-    for ( int pin = 0; pin < 3; pin++) {
-        reset();
-        digitalWrite(2 + pin, HIGH);
-        digitalWrite(7 - pin, HIGH);
-        delay(1000);
-    }
-}
-
-void get_closer() {
-    for ( int pin = 0; pin < 3; pin++) {
-        reset();
-        digitalWrite(4 - pin, HIGH);
-        digitalWrite(5 + pin, HIGH);
-        delay(1000);
-    }
-}
-
-
-void loop() {
-    // A
-    alternate();
-
-    //B
-    // forward();
-
-    //C
-    // forward();
-    // backward();
-
-    // D
-    // move_away();
-    // get_closer();
-}
-        </code>
-        </pre>
             </details>
         </article>
     </body>
