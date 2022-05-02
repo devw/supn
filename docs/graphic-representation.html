@@ -173,21 +173,139 @@ plt.show()
         <article>
             <details>
                 <summary>Bar Plot</summary>
+                <div>
+                    <h2></h2>
+                </div>
+                <div>
+                    <h2>pyplot.bar</h2>
+                    <p>A barplot shows the relationship between a numeric and a categoric variable.</p>
+                    <pre><code class="python">
+import numpy as np
+import matplotlib.pyplot as plt
+
+categories = ('Undergraduate Degree', 'Graduate Degree', 'PhD', 'Post-Doc')
+students_num = (432, 300, 100, 50)
+
+# np.arange(...) Returns equidistant values within a given range.
+# it is equivalent to [x for x in range(4)]
+x_pos = np.arange(len(students_num))
+plt.bar(x_pos, students_num, align='center')
+
+# set the current tick locations and labels of the x-axis.
+plt.xticks(x_pos, categories, rotation=20)
+plt.xlabel('Categories')
+plt.ylabel("Students number")
+
+plt.show()
+</code></pre>
+                </div>
             </details>
         </article>
         <article>
             <details>
                 <summary>Histogram</summary>
+                <div>
+                    <h2>pyplot.hist</h2>
+                    <p></p>
+                    <pre><code class="python">
+import numpy as np
+import matplotlib.pyplot as plt   
+
+# Generate a random samples from a normal (Gaussian) distribution.
+x = np.random.normal(loc=0.0, scale=1.0, size=5000)
+
+# n: is the number of counts in each bin of the histogram
+# bins: is the left hand edge of each bin
+# patchesis the individual patches used to create the histogram, e.g a collection of rectangles
+n, bins, patches = plt.hist(x, 20, facecolor='green')
+
+# The patches can be used to change the properties of individual bars as in these examples.
+plt.setp(patches[10], 'facecolor', 'y')
+
+plt.xlabel('values')
+plt.ylabel('frequency')
+
+plt.show()
+</code></pre>
+                </div>
             </details>
         </article>
         <article>
             <details>
                 <summary>Pie Chart</summary>
+                <div>
+                    <h2></h2>
+                    <p></p>
+                    <pre><code class="python">
+import matplotlib.pyplot as plt
+
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+explode = (0, 0.1, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+# The default startangle is 0, which would start the "Frogs" slice on the positive x-axis.
+# This example sets startangle = 90
+# such that everything is rotated counter-clockwise by 90 degrees, and the frog slice starts on the positive y-axis.
+plt.pie(sizes, explode=explode, labels=labels,
+        autopct='%1.1f%%', shadow=True, startangle=90)
+
+plt.show()
+                    </code></pre>
+                </div>
             </details>
         </article>
-        <article>
+        <article id="pillow">
             <details>
-                <summary>Pillow</summary>
+                <summary>Image Processing with Pillow Library</summary>
+                <div>
+                    <h2>Pillow</h2>
+                    <p>
+                        Pillow is a python library derived from an older library called PIL. PIL stands for Python
+                        Imaging Library, and it is the original library that enabled Python to deal with images.
+                    </p>
+                    <pre><code class="python">
+# display an image from a URL
+from PIL import Image
+url = "https://picsum.photos/800/500"
+img = Image.open(requests.get(url, stream=True).raw)
+img.load()
+img.show()
+                    </code></pre>
+                    <pre><code class="python">
+# display an image from the local disk
+from PIL import Image
+filename = "/tmp/standing-stones-6941184_1280.jpeg"
+img = Image.open(filename)
+img.load()
+img.show()
+                    </code></pre>
+                    <p>The three key properties of the images are format, size, and the color model.</p>
+
+                    <pre><code class="python">
+>>> img.format
+'JPEG'
+
+>>> img.size
+(1920, 1273)
+
+>>> img.mode
+'RGB'
+                    </code></pre>
+                    <p>
+                        Write a program that prints the three key properties of the images (format, size, and the color
+                        model)
+                    </p>
+                    <pre class="blur"><code class="python">
+from PIL import Image
+url = "https://picsum.photos/800/500"
+img = Image.open(requests.get(url, stream=True).raw)
+img.load()
+print(f"image format {img.format}")
+print(f"image size {img.size}")
+print(f"image mode {img.mode}")
+                    </code></pre>
+                </div>
             </details>
         </article>
     </body>
