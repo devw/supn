@@ -48,6 +48,49 @@ Serial.println("hello");
                 </pre>
             </details>
         </article>
+        <article>
+            <details>
+                <summary>Button with Delay</summary>
+                <img class="w-500" src="./images/uno-btn-led-light.png" alt="" />
+                <pre><code class="C">
+
+const int ledPin =  4;// the number of the LED pin
+
+const int btnPin =  7;
+
+// Variables will change:
+int ledState = LOW;             // ledState used to set the LED
+
+// Generally, you should use "unsigned long" for variables that hold time
+// The value will quickly become too large for an int to store
+unsigned long previousMillis = 0;        // will store last time LED was updated
+
+// constants won't change:
+const long interval = 100;           // interval at which to blink (milliseconds)
+
+void setup() {
+    // set the digital pin as output:
+    pinMode(ledPin, OUTPUT);
+    pinMode(btnPin, INPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+    unsigned long currentMillis = millis();
+    //Serial.println(currentMillis - previousMillis);
+    if (digitalRead(btnPin) == HIGH)
+    Serial.println("btn pressed");
+
+
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+}
+                    
+                </code></pre>
+            </details>
+        </article>
         <article id="terminology">
             <details>
                 <summary>millis()</summary>
