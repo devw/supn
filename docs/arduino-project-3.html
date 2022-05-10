@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Arduino Project 2</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="basic-commands">
+            <details>
+                <summary>Basic commands</summary>
+                <h2>C Basic commands</h2>
+                <pre>
+                    <code class="C">
+// Ternary operator 
+// It is used to execute code based on the result of a binary condition.
+condition ? value_if_true : value_if_false
+
+                    </code>
+                </pre>
+                <h2>Arduino commands</h2>
+                <pre>
+                    <code class="C">
+// It configures a specific pin to behave either as an input or an output
+pinMode(PIN_LED, OUTPUT/INPUT); 
+
+// Write a HIGH or a LOW value to a digital pin.
+int PIN_NUMBER;
+digitalWrite(PIN_NUMBER, HIGH/LOW);
+
+// Pauses the program for the amount of time (in miliseconds) 
+// specified as parameter. 
+int one_sec = 1000; // 1 s = 1_000 ms
+delay(one_sec);
+
+// Establishes serial communication between your Arduino board 
+// and another device (computer).
+// 9600 -> baud rate (it determines the speed of communication over a data channel.)                   
+Serial.begin(9600);
+Serial.println("hello");
+                    </code>
+                </pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Button with Delay</summary>
+                <img src="images/btn.png" alt="" />
+                <img src="images/btn2.png" alt="" />
+                <img class="w-500" src="./images/uno-btn-led-light.png" alt="" />
+                <pre><code class="C">
+
+const int ledPin =  4;// the number of the LED pin
+
+const int btnPin =  7;
+
+// Variables will change:
+int ledState = LOW;             // ledState used to set the LED
+
+// Generally, you should use "unsigned long" for variables that hold time
+// The value will quickly become too large for an int to store
+unsigned long previousMillis = 0;        // will store last time LED was updated
+
+// constants won't change:
+const long interval = 100;           // interval at which to blink (milliseconds)
+
+void setup() {
+    // set the digital pin as output:
+    pinMode(ledPin, OUTPUT);
+    pinMode(btnPin, INPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+    unsigned long currentMillis = millis();
+    //Serial.println(currentMillis - previousMillis);
+    if (digitalRead(btnPin) == HIGH)
+    Serial.println("btn pressed");
+
+
+    digitalWrite(ledPin, HIGH);
+    delay(1000);
+    digitalWrite(ledPin, LOW);
+    delay(1000);
+}
+                    
+                </code></pre>
+            </details>
+        </article>
+        <article id="terminology">
+            <details>
+                <summary>millis()</summary>
+                <div>
+                    <h2>Introduction</h2>
+                    <p>
+                        The function millis() returns the number of milliseconds passed since the Arduino board began
+                        running the current program. This number will overflow (go back to zero), after approximately 50
+                        days.
+                    </p>
+                    <p>
+                        This example code prints on the serial port the number of milliseconds passed since the Arduino
+                        board started running the code itself.
+                    </p>
+                    <pre><code class="C">
+unsigned long myTime;
+
+void setup() {
+    Serial.begin(9600);
+}
+void loop() {
+    Serial.print("Time: ");
+    myTime = millis();
+
+    Serial.println(myTime); // prints time since program started
+    delay(1000);          // wait a second so as not to send massive amounts of data
+}
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>LED Blinking With a Push Button</summary>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>Write a program able to control when the led is lit via a push button.</p>
+                </div>
+                <div>
+                    <h2>Blink a Led without delay</h2>
+                    <p>Write a program that Blink a Led without delay.</p>
+                    <!-- https://www.youtube.com/watch?v=ECOgJh-d7VE&ab_channel=BasonTech -->
+                    <pre><code class="C">
+
+const int ledPin =  4; // the number of the LED pin
+
+// Variables will change:
+int ledState = LOW;             // ledState used to set the LED
+
+// Generally, you should use "unsigned long" for variables that hold time
+// The value will quickly become too large for an int to store
+unsigned long previousMillis = 0;        // will store last time LED was updated
+
+// constants won't change:
+const long interval = 100;           // interval at which to blink (milliseconds)
+
+void setup() {
+    // set the digital pin as output:
+    pinMode(ledPin, OUTPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+    // here is where you'd put code that needs to be running all the time.
+
+    // check to see if it's time to blink the LED; that is, if the difference
+    // between the current time and last time you blinked the LED is bigger than
+    // the interval at which you want to blink the LED.
+    unsigned long currentMillis = millis();
+    Serial.println(currentMillis - previousMillis);
+    if (currentMillis - previousMillis >= interval) {
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+    
+    // if the LED is off turn it on and vice-versa:
+    ledState = ledState == LOW ? HIGH : LOW;
+
+    // set the LED with the ledState of the variable:
+    digitalWrite(ledPin, ledState);
+    }
+}
+                        
+
+                        </code>
+                    </pre>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

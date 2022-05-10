@@ -199,6 +199,11 @@ plt.ylabel("Students number")
 plt.show()
 </code></pre>
                 </div>
+                <div>
+                    <h2>Exercise</h2>
+                    <p>Write a program that produces the following figure.</p>
+                    <img src="./images/composition-of-lunar-soil.png" alt="" />
+                </div>
             </details>
         </article>
         <article>
@@ -228,6 +233,29 @@ plt.ylabel('frequency')
 plt.show()
 </code></pre>
                 </div>
+                <div>
+                    <h2>Exercise</h2>
+                    <p>Write a program that produces the following figure. Hint: x = np.random.poisson(4, 100000)</p>
+                    <img src="./images/poisson.png" alt="" />
+                    <pre class="blur"><code class="python">
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate a random samples from a poisson distribution.
+x = np.random.poisson(4, 100000)
+n, bins, patches = plt.hist(x, 15, facecolor='green')
+
+# The patches can be used to change the properties of individual bars as in these examples.
+plt.setp(patches[3], 'facecolor', 'b')
+
+plt.xlabel('values')
+plt.ylabel('frequency')
+
+plt.show()
+                        
+                    </code></pre>
+                </div>
             </details>
         </article>
         <article>
@@ -251,6 +279,25 @@ plt.pie(sizes, explode=explode, labels=labels,
         autopct='%1.1f%%', shadow=True, startangle=90)
 
 plt.show()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise</h2>
+                    <p>Write a program that produces the following figure.</p>
+                    <img src="./images/pie-program-language.png" alt="" />
+                    <pre class="blur"><code class="python">
+import matplotlib.pyplot as plt
+
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+labels = 'Python', 'Javascript', 'PHP'
+sizes = [45, 30, 25]
+explode = (0.1, 0, 0)  # only "explode" the 1st slice (i.e. 'Python')
+
+plt.pie(sizes, explode=explode, labels=labels,
+        autopct='%1.1f%%', shadow=True, startangle=270)
+
+plt.show()
+
                     </code></pre>
                 </div>
             </details>
