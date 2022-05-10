@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><summary>Quartile Formula</summary></title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction">
+            <details>
+                <summary>Quartile</summary>
+                <div>
+                    <h2>Introduction</h2>
+                    <p>
+                        The quartile formula helps in calculating the value that divides a list of numbers into
+                        quarters.
+                    </p>
+                    <p>The data is firstly arranged into ascending order and is then divided into quartiles.</p>
+                    <p>
+                        Median divides a given data into two equal parts while quartiles divide it into four parts.
+                        Using the quartile formula we can find the first quartile, second quartile, and third quartile.
+                    </p>
+                    <img class="w-500" src="./images/quartile.png" alt="" />
+                </div>
+                <div>
+                    <h2>Quartile Formula</h2>
+                    <p>Lower Quartile (Q1) = ( N + 1 ) * 1 / 4</p>
+                    <p>Middle Quartile (Q2) = ( N + 1 ) * 1 / 2</p>
+                    <p>Upper Quartile (Q3) = ( N + 1 ) * 3 / 4</p>
+                    <img class="w-500" src="./images/quartile-formula.jpeg" alt="" />
+                </div>
+                <div>
+                    <h2>Example</h2>
+                    <p>Find the 1st, 2nd and 3rd quartile in the following data set: 4, 5, 8, 7, 11, 9, 9</p>
+                    <p>Let us first arrange our array in ascending order and it becomes 4, 5, 7, 8, 9, 9, 11</p>
+                    <p>The median (Q2) of our data is 8.</p>
+                    <p>The 1st quartile (Q1) of our data is 5.</p>
+                    <p>The 3rd quartile (Q3) of our data is 9.</p>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>How to calculate quartiles in python</summary>
+                <div>
+                    <h2>Quartiles by using pandasBy using NumPy</h2>
+                    <pre><code class="python">
+# The standard way to import NumPy:
+import numpy as np  
+
+nums = [9, 5, 7, 11, 9, 4, 8]
+nums.sort()
+
+q2 = np.median(nums)
+q1 = np.median(nums[: (len(nums) // 2)])
+q3 = np.median(nums[(len(nums) // 2) :])
+
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Quartiles without using built-in functions</h2>
+                    <pre><code class="python">
+nums = [9, 5, 7, 11, 9, 4, 8]
+print(nums)
+
+for i in range(len(nums)):
+    for j in range(i + 1, len(nums)):
+        if nums[i] > nums[j]:
+            nums[i], nums[j] = nums[j], nums[i]
+
+print(nums)
+q2 = nums[len(nums) // 2]
+q1 = nums[(len(nums) * 1) // 4]
+q3 = nums[(len(nums) * 3) // 4]
+
+print(f"q2: {q2}\nq1: {q1}\nq3: {q3}")
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Sort a Dictionary in Python</summary>
+                <div>
+                    <h2>Sort a Dictionary by Key in Python</h2>
+                    <pre><code class="python">
+city_distance = {'Rome': 200, 'Paris': 0, 'London': 100} 
+
+print(city_distance.keys())
+
+{key : city_distance[key] for key in sorted(city_distance.keys())}
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Lambda Expressions</h2>
+                    <p>
+                        Small anonymous functions can be created with the lambda keyword. This function returns the sum
+                        of its two arguments.
+                        <a href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions"></a>
+                    </p>
+                    <pre><code class="python">
+lambda a, b: a+b 
+
+[(lambda x: x * x)( x ) for x in range(10)]
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Sort a Dictionary by Value in Python</h2>
+                    <p></p>
+                    <pre><code class="python">
+city_distance = {'Rome': 200, 'Paris': 0, 'London': 100} 
+
+print(city_distance.items())
+
+# help(sorted)
+{k: v for k, v in sorted(city_distance.items(), key=lambda item: item[1])}
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+
