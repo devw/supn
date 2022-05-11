@@ -16,7 +16,7 @@
             <details>
                 <summary>Exercises 1</summary>
                 <p>Given a list, write a python function to swap first and last element of the list.</p>
-                <pre class="blur"><code class="python">
+                <pre class=""><code class="python">
 def swapFirstLast(arr):
     arr[0], arr[-1] = arr[-1], arr[0]
     return arr
@@ -30,7 +30,7 @@ def swapFirstLast(arr):
                     Given a list of positive numbers, write a python function to find the difference between the maximum
                     and the minimum of an array without using inbuilt functions min, max, sort and sorted..
                 </p>
-                <pre class="blur"><code class="python">
+                <pre class=""><code class="python">
 def bubbleSort(arr):
     for i in range(len(arr)):
         for j in range(len(arr) - i - 1):
@@ -66,7 +66,37 @@ print(f"getMinMaxDelta {getMinMaxDelta(bubbleSort([10, 3, 4, 5]))}")
                     <p>Input_4: [-4, 10, -3, 8, 9, 12]</p>
                     <p>Output_4: [(-4, -3), (8, 9), (9, 10)]</p>
                 </div>
-                <pre class="blur"><code class="python">
+                <div>
+                    <h2>Solution via Loops (by #roseC)</h2>
+                    <pre class=""><code class="python">
+def abs_dif(integers_list):
+    min_absolute_difference = float("inf")
+
+    sorted_integers_list = sorted(integers_list)
+
+    for index in range(0, len(sorted_integers_list)-1):
+        small_num = sorted_integers_list[index]
+        large_num = sorted_integers_list[index+1]
+        absolute_difference = abs(large_num-small_num)
+        if absolute_difference <= min_absolute_difference:
+            min_absolute_difference = absolute_difference
+
+    # we have the exact min_absolute_difference
+    min_pairs_list = []
+
+    for index in range(0, len(sorted_integers_list)-1):
+        small_num = sorted_integers_list[index]
+        large_num = sorted_integers_list[index+1]
+        absolute_difference = abs(large_num-small_num)
+        if absolute_difference == min_absolute_difference:
+            min_pairs_list.append([small_num, large_num])
+    return min_pairs_list
+                                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <h2>Solution via Dictionary Comprehension</h2>
+                    <pre class=""><code class="python">
 def closestNumbers(arr):
     dictionary = {}
     arr = sorted(arr)
@@ -77,7 +107,9 @@ def closestNumbers(arr):
     minimum = min(dictionary.values())
 
     return[k for k, v in dictionary.items() if v == minimum]
-                </code></pre>
+                                        </code>
+                    </pre>
+                </div>
             </details>
         </article>
     </body>

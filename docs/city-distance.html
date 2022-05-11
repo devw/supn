@@ -49,7 +49,7 @@
             <details>
                 <summary>How to calculate quartiles in python</summary>
                 <div>
-                    <h2>Quartiles by using pandasBy using NumPy</h2>
+                    <h2>Quartiles by using using NumPy</h2>
                     <pre><code class="python">
 # The standard way to import NumPy:
 import numpy as np  
@@ -111,7 +111,30 @@ lambda a, b: a+b
                     </code></pre>
                 </div>
                 <div>
-                    <h2>Sort a Dictionary by Value in Python</h2>
+                    <h2>Sort a Dictionary by Value with loops</h2>
+                    <p></p>
+                    <pre><code class="python">
+city_dic = {'Rome': 200, 'Paris': 0, 'London': 100}
+print("city_dic non sorted\n", city_dic)
+
+
+city_dis = list(city_dic.values())
+city_nam = list(city_dic.keys())
+
+for i in range(len(city_dis)):
+    for j in range(i, len(city_dis) - i - 1):
+        if city_dis[j] > city_dis[j + 1]:
+            city_dis[j], city_dis[j + 1] = city_dis[j + 1], city_dis[j]
+            city_nam[j], city_nam[j + 1] = city_nam[j + 1], city_nam[j]
+
+new_city_dic = {}
+for i in range(len(city_dis)):
+    new_city_dic[city_nam[i]] = city_dis[i]
+print("new_city_dic sorted by distancec:\n", new_city_dic)
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Sort a Dictionary by Value in Python (via Dictionary Comprehension)</h2>
                     <p></p>
                     <pre><code class="python">
 city_distance = {'Rome': 200, 'Paris': 0, 'London': 100} 
