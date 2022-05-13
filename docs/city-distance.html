@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><summary>Quartile Formula</summary></title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction">
+            <details>
+                <summary>Quartile</summary>
+                <div>
+                    <h2>Introduction</h2>
+                    <p>
+                        The quartile formula helps in calculating the value that divides a list of numbers into
+                        quarters.
+                    </p>
+                    <p>The data is firstly arranged into ascending order and is then divided into quartiles.</p>
+                    <p>
+                        Median divides a given data into two equal parts while quartiles divide it into four parts.
+                        Using the quartile formula we can find the first quartile, second quartile, and third quartile.
+                    </p>
+                    <img class="w-500" src="./images/quartile.png" alt="" />
+                </div>
+                <div>
+                    <h2>Quartile Formula</h2>
+                    <p>Lower Quartile (Q1) = ( N + 1 ) * 1 / 4</p>
+                    <p>Middle Quartile (Q2) = ( N + 1 ) * 1 / 2</p>
+                    <p>Upper Quartile (Q3) = ( N + 1 ) * 3 / 4</p>
+                    <img class="w-500" src="./images/quartile-formula.jpeg" alt="" />
+                </div>
+                <div>
+                    <h2>Example</h2>
+                    <p>Find the 1st, 2nd and 3rd quartile in the following data set: 4, 5, 8, 7, 11, 9, 9</p>
+                    <p>Let us first arrange our array in ascending order and it becomes 4, 5, 7, 8, 9, 9, 11</p>
+                    <p>The median (Q2) of our data is 8.</p>
+                    <p>The 1st quartile (Q1) of our data is 5.</p>
+                    <p>The 3rd quartile (Q3) of our data is 9.</p>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>How to calculate quartiles in python</summary>
+                <div>
+                    <h2>Quartiles by using using NumPy</h2>
+                    <pre><code class="python">
+# The standard way to import NumPy:
+import numpy as np  
+
+nums = [9, 5, 7, 11, 9, 4, 8]
+nums.sort()
+
+q2 = np.median(nums)
+q1 = np.median(nums[: (len(nums) // 2)])
+q3 = np.median(nums[(len(nums) // 2) :])
+
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Quartiles without using built-in functions</h2>
+                    <pre><code class="python">
+nums = [9, 5, 7, 11, 9, 4, 8]
+print(nums)
+
+for i in range(len(nums)):
+    for j in range(i + 1, len(nums)):
+        if nums[i] > nums[j]:
+            nums[i], nums[j] = nums[j], nums[i]
+
+print(nums)
+q2 = nums[len(nums) // 2]
+q1 = nums[(len(nums) * 1) // 4]
+q3 = nums[(len(nums) * 3) // 4]
+
+print(f"q2: {q2}\nq1: {q1}\nq3: {q3}")
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article id="project-td2">
+            <details>
+                <summary id="project">Sort cities by distance</summary>
+                <img src="images/france-city-distance.jpg" alt="">
+                <h2>Exercise text</h2>
+                <p>
+                    Download the France's cities data which file is available at this link ( <a href="data/laposte_hexasmal.small.csv">small data-set</a> ) (<a href="https://www.data.gouv.fr/fr/datasets/r/554590ab-ae62-40ac-8353-ee75162c05ee">original data-set</a>)  and write an app able to perform the following steps:
+                    <ol>
+                        <!-- <li>implement an algorithms to sort the France's cities in ascending order of distance from a given city. The goal is to propose the fastest possible algorithm.</li> -->
+                        <li>write a function able to read a csv file and organize store data in a data structure.</li>
+                        <li>write a function (haversine) able to calculate the distance in kilometers between two points on the earth.</li>
+                        <li>write a function that takes as input a city's name, and generates as output a list of quartile values. The quartile values refer to the cities' distances from the city passed as an input.</li> 
+                            <pre>
+min : 0.82 km pour PARIS 02 (75002)
+premier quartile : 187.15 km pour PONT SUR SAMBRE (59138) 318.88 km pour BELLEFONTAINE (88370) 
+médiane : 318.88 km pour BELLEFONTAINE (88370)
+troisième quartile : 459.81 km pour QUEYSSAC (24140)
+max : 9422.32 km pour ST PHILIPPE (97442)
+                            </pre>
+                        </li>
+                    </ol>
+                </p>
+
+                <h2>read and organize csv data</h2>
+                <pre><code class="python">
+from urllib.request import urlopen
+
+# organize data
+def organize_data():
+    url = "https://devw.github.io/supn/data/laposte_hexasmal.small.csv"
+    response = urlopen(url)
+    data = response.read().decode('utf-8')
+    lines = data.split("\n")
+    for line in lines:
+      fields = line.split(";")
+      print("CAP", fields[0])
+
+organize_data()
+                </code></pre>
+
+                <h2>haversine function</h2>
+                <pre>
+                    <code class="python">
+# haversine
+from math import radians, cos, sin, asin, sqrt
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance in kilometers between two points 
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles. Determines return value units.
+    return c * r
+                    </code>
+                </pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Sort a dictionary in python</summary>
+                <div>
+                    <h2>Sort a Dictionary by Key in Python</h2>
+                    <pre><code class="python">
+city_distance = {'Rome': 200, 'Paris': 0, 'London': 100} 
+
+print(city_distance.keys())
+
+{key : city_distance[key] for key in sorted(city_distance.keys())}
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Lambda Expressions</h2>
+                    <p>
+                        Small anonymous functions can be created with the lambda keyword. This function returns the sum
+                        of its two arguments.
+                        <a href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions"></a>
+                    </p>
+                    <pre><code class="python">
+lambda a, b: a+b 
+
+[(lambda x: x * x)( x ) for x in range(10)]
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Sort a Dictionary by Value with loops</h2>
+                    <p></p>
+                    <pre><code class="python">
+city_dic = {'Rome': 200, 'Paris': 0, 'London': 100}
+print("city_dic non sorted\n", city_dic)
+
+
+city_dis = list(city_dic.values())
+city_nam = list(city_dic.keys())
+
+for i in range(len(city_dis)):
+    for j in range(i, len(city_dis) - i - 1):
+        if city_dis[j] > city_dis[j + 1]:
+            city_dis[j], city_dis[j + 1] = city_dis[j + 1], city_dis[j]
+            city_nam[j], city_nam[j + 1] = city_nam[j + 1], city_nam[j]
+
+new_city_dic = {}
+for i in range(len(city_dis)):
+    new_city_dic[city_nam[i]] = city_dis[i]
+print("new_city_dic sorted by distancec:\n", new_city_dic)
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Sort a Dictionary by Value in Python (via Dictionary Comprehension)</h2>
+                    <p></p>
+                    <pre><code class="python">
+city_distance = {'Rome': 200, 'Paris': 0, 'London': 100} 
+
+print(city_distance.items())
+
+# help(sorted)
+{k: v for k, v in sorted(city_distance.items(), key=lambda item: item[1])}
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+
