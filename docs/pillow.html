@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pillow - Image manipulation</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article>
+            <details>
+                <summary>Digital image</summary>
+                <div id="digital-image">
+                    <h2>What is a digital image?</h2>
+                    <ul>
+                        <li>A digital image is a two-dimensional function f(x, y).</li>
+                        <li>x and y are spatial coordinates.</li>
+                        <li>
+                            The amplitude of f is called “intensity level” (shades of gray or color) at the point (x,
+                            y).
+                        </li>
+                    </ul>
+                </div>
+                <div id="pixel">
+                    <h2>Pixel</h2>
+                    <ul>
+                        <li>The digital image is sampled and mapped as a grid of dots or picture elements (pixels).</li>
+                        <li>
+                            To each pixel is assigned a tonal value (black, white, shades of gray or color), which is
+                            represented in binary code (zeros and ones).
+                        </li>
+                        <li>
+                            As shown in this bitonal image, to each pixel is assigned a tonal value, in this example 0
+                            for black and 1 for white.
+                        </li>
+                    </ul>
+                    <img src="./images/pixel-bitonal.png" alt="" />
+                    <p>Individual pixels can be seen by zooming in an image.</p>
+                    <img src="./images/zoom.png" alt="" />
+                </div>
+                <div>
+                    <h2>What is the dimension of an image in pixels?</h2>
+                    <ul>
+                        <li>
+                            The pixel dimensions are the horizontal and vertical measurements of an image expressed in
+                            pixels.
+                        </li>
+                        <li>
+                            The pixel dimensions are determined by multiplying both the width and the height (measured
+                            in inch) by the dpi (dots-per-inch).
+                        </li>
+                        <li>
+                            An 8" x 10" image, that is scanned at 300 dpi, has the pixel dimensions of 2,400 pixels (8"
+                            x 300 dpi) by 3,000 pixels (10" x 300 dpi).
+                        </li>
+                    </ul>
+                    <img src="./images/pixel-dimension.png" alt="" />
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>RGB color model</summary>
+
+                <div>
+                    <h2>Introduction</h2>
+                    <p>
+                        The RGB color model is an additive color model in which the red, green, and blue primary colors
+                        of light are added together in various ways to reproduce a broad array of colors.
+                    </p>
+                    <img src="./images/RGB_illumination.jpeg" alt="" />
+                </div>
+            </details>
+        </article>
+        <article id="introuduction-pillow">
+            <details>
+                <summary>Image Processing with Pillow Library</summary>
+                <div>
+                    <h2>Pillow</h2>
+                    <p>
+                        Pillow is a python library derived from an older library called PIL. PIL stands for Python
+                        Imaging Library, and it is the original library that enabled Python to perform image
+                        manipulation.
+                        <a target="_" href="https://github.com/python-pillow/Pillow">Pillow GitHub.</a>
+                    </p>
+                    <pre><code class="python">
+# display an image from a URL
+from PIL import Image
+import requests
+url = "https://picsum.photos/800/500"
+img = Image.open(requests.get(url, stream=True).raw)
+img.load()
+img.show()
+                    </code></pre>
+                    <pre><code class="python">
+# display an image from the local disk
+from PIL import Image
+filename = "/tmp/standing-stones-6941184_1280.jpeg"
+img = Image.open(filename)
+img.load()
+img.show()
+                    </code></pre>
+                    <p>The three key properties of the images are format, size, and the color model.</p>
+
+                    <pre><code class="python">
+>>> img.format
+'JPEG'
+
+>>> img.size
+(1920, 1273)
+
+>>> img.mode
+'RGB'
+                    </code></pre>
+                    <p>
+                        Write a program that prints the three key properties of the images (format, size, and the color
+                        model)
+                    </p>
+                    <pre class=""><code class="python">
+from PIL import Image
+import requests
+url = "https://picsum.photos/800/500"
+img = Image.open(requests.get(url, stream=True).raw)
+img.load()
+print(f"image format {img.format}")
+print(f"image size {img.size}")
+print(f"image mode {img.mode}")
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Image.getpixel and Image.putpixel</summary>
+                <div>
+                    <h2>Image.getpixel(xy)</h2>
+                    <p>Image.getpixel(xy) returns the pixel value at a given position.</p>
+                    <pre><code class="python">
+# We access the value of the pixel of the image img 
+# which is in line 50 and in column 100 via the instruction "img.getpixel((50, 100))".
+
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/800/500"
+img = Image.open(requests.get(url, stream=True).raw)
+img.load()
+val = img.getpixel((50, 100))
+print(val)
+</code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>Write a python function that counts the number of black pixels in an image.</p>
+                    <pre class=""><code class="python">
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/id/237/50/70"
+img = Image.open(requests.get(url, stream=True).raw)
+
+def get_black_pixels_count():
+    width = img.size[0]
+    height = img.size[1]
+    black_pixel_count = 0
+    for x in range(width):
+        for y in range(height):
+            print(img.getpixel((x, y)))
+            if (0, 0, 0) == img.getpixel((x, y)):
+                black_pixel_count += 1
+    return black_pixel_count
+
+
+res = get_black_pixels_count()
+print(res)
+img.load()
+img.show()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Image.putpixel(xy, color)</h2>
+                    <p>
+                        Image.putpixel modifies the pixel at the given position.
+                        <a
+                            target="_"
+                            href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.putpixel"
+                            >putpixel doc</a
+                        >
+                    </p>
+                    <pre><code class="python">
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/20/20"
+img = Image.open(requests.get(url, stream=True).raw)
+
+img2 = img.copy()
+img2.putpixel((0, 0), 0)
+img2.putpixel((1, 1), 0)
+img2.putpixel((2, 2), (255, 0, 0))
+img2.putpixel((3, 3), (0, 255, 0))
+img2.putpixel((5, 4), (0, 0, 255))
+
+print(img2.getpixel((0, 0)))
+
+img2.save("/tmp/img_medicale_contrast.png", format="png")
+img2.load()
+img2.show()
+                        </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 2</h2>
+                    <p>Write a python function that draws a square.</p>
+                    <img src="./images/square.png" alt="" />
+                    <pre class=""><code class="python">
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/500/500"
+img = Image.open(requests.get(url, stream=True).raw)
+
+
+def draw_square(side, p0):
+    for i in range(side):
+        img.putpixel((p0 + side, p0 + i), (255, 0, 0))
+        img.putpixel((p0 + i, p0 + 0), (255, 0, 0))
+        img.putpixel((p0 + 0, p0 + i), (255, 0, 0))
+        img.putpixel((p0 + i, p0 + side), (255, 0, 0))
+
+
+draw_square(300, 40)
+draw_square(300, 50)
+img.load()
+img.show()
+                    </code></pre>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

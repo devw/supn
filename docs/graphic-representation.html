@@ -302,59 +302,6 @@ plt.show()
                 </div>
             </details>
         </article>
-        <article id="pillow">
-            <details>
-                <summary>Image Processing with Pillow Library</summary>
-                <div>
-                    <h2>Pillow</h2>
-                    <p>
-                        Pillow is a python library derived from an older library called PIL. PIL stands for Python
-                        Imaging Library, and it is the original library that enabled Python to deal with images.
-                    </p>
-                    <pre><code class="python">
-# display an image from a URL
-from PIL import Image
-url = "https://picsum.photos/800/500"
-img = Image.open(requests.get(url, stream=True).raw)
-img.load()
-img.show()
-                    </code></pre>
-                    <pre><code class="python">
-# display an image from the local disk
-from PIL import Image
-filename = "/tmp/standing-stones-6941184_1280.jpeg"
-img = Image.open(filename)
-img.load()
-img.show()
-                    </code></pre>
-                    <p>The three key properties of the images are format, size, and the color model.</p>
-
-                    <pre><code class="python">
->>> img.format
-'JPEG'
-
->>> img.size
-(1920, 1273)
-
->>> img.mode
-'RGB'
-                    </code></pre>
-                    <p>
-                        Write a program that prints the three key properties of the images (format, size, and the color
-                        model)
-                    </p>
-                    <pre class="blur"><code class="python">
-from PIL import Image
-url = "https://picsum.photos/800/500"
-img = Image.open(requests.get(url, stream=True).raw)
-img.load()
-print(f"image format {img.format}")
-print(f"image size {img.size}")
-print(f"image mode {img.mode}")
-                    </code></pre>
-                </div>
-            </details>
-        </article>
     </body>
     <script>
         hljs.highlightAll();

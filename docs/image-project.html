@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Image Projects</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article id="introduction">
+            <details>
+                <summary>Introduction</summary>
+                <div>
+                    <h2>IT solution to improve the visual quality of images</h2>
+                    <ul>
+                        <li>Display the sorting of the different colors present in the image</li>
+                        <li>Increase the brightness of the image and show the result before and after</li>
+                        <li>Decrease the brightness of the image and show the result before and after</li>
+                        <li>Increase image contrast by histogram dilation and display the result before and after</li>
+                    </ul>
+                    <p>
+                        To increase the brightness, simply add a fixed value to all the gray levels of the image pixels.
+                    </p>
+                    <p>
+                        To decrease the luminosity it will be necessary on the contrary to subtract a fixed value at all
+                        the levels of gray of the image pixels.
+                    </p>
+                    <p>
+                        To do the histogram dilation, just apply the affine transformation x — 256s(x—imin)/(imax—imin)
+                        at each pixel x of the image, rounding to the nearest integer and replacing negative values with
+                        0 and values greater than 256 with 255. imin being the minimum gray level and imax the maximum
+                        gray level found in the image.
+                    </p>
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
