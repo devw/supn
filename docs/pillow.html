@@ -91,6 +91,7 @@
                     <pre><code class="python">
 # display an image from a URL
 from PIL import Image
+import requests
 url = "https://picsum.photos/800/500"
 img = Image.open(requests.get(url, stream=True).raw)
 img.load()
@@ -120,8 +121,9 @@ img.show()
                         Write a program that prints the three key properties of the images (format, size, and the color
                         model)
                     </p>
-                    <pre class="blur"><code class="python">
+                    <pre class=""><code class="python">
 from PIL import Image
+import requests
 url = "https://picsum.photos/800/500"
 img = Image.open(requests.get(url, stream=True).raw)
 img.load()
@@ -144,6 +146,7 @@ print(f"image mode {img.mode}")
 
 from PIL import Image
 import requests
+
 url = "https://picsum.photos/800/500"
 img = Image.open(requests.get(url, stream=True).raw)
 img.load()
@@ -154,13 +157,12 @@ print(val)
                 <div>
                     <h2>Exercise 1</h2>
                     <p>Write a python function that counts the number of black pixels in an image.</p>
-                    <pre class="blur"><code class="python">
+                    <pre class=""><code class="python">
 from PIL import Image
 import requests
 
 url = "https://picsum.photos/id/237/50/70"
 img = Image.open(requests.get(url, stream=True).raw)
-
 
 def get_black_pixels_count():
     width = img.size[0]
@@ -184,7 +186,9 @@ img.show()
                     <h2>Image.putpixel(xy, color)</h2>
                     <p>
                         Image.putpixel modifies the pixel at the given position.
-                        <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.putpixel"
+                        <a
+                            target="_"
+                            href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.putpixel"
                             >putpixel doc</a
                         >
                     </p>
@@ -213,7 +217,7 @@ img2.show()
                     <h2>Exercise 2</h2>
                     <p>Write a python function that draws a square.</p>
                     <img src="./images/square.png" alt="" />
-                    <pre class="blur"><code class="python">
+                    <pre class=""><code class="python">
 from PIL import Image
 import requests
 
