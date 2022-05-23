@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz - Advanced Algorithm 1</title>
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./collapse.css" />
+        <script src="vendors/highlight.min.js"></script>
+        <script src="vendors/highlight.ln.min.js"></script>
+        <link rel="stylesheet" href="vendors/highlight.min.css" />
+    </head>
+    <body>
+        <article>
+            <details>
+                <summary>Couting Sort Exercises</summary>
+                <div id="exercise-1">
+                    <h2>Exercise 1</h2>
+                    <p>write a function to return the number of occurrences (or frequency) in a array.</p>
+                    <p>example_1: IN: [0, 1, 1, 1, 2], 2; OUT: [1, 3, 1]</p>
+                    <p>example_2: IN: [1, 1, 1, 2, 4], 4; OUT: [0, 3, 1, 0, 1]</p>
+                    <pre class="blur"><code class="python">
+def get_occurrences(nums, n):
+    """
+    write a function to return the number of occurrences (or frequency) in an array.
+    example: 
+    IN: [2, 1, 2, 2], OUT: [0, 1, 3]
+    """
+    occurrences = [0] * (n + 1)
+    for num in nums:
+        occurrences[num] += 1
+    return occurrences
+
+
+nums = [1, 1, 1, 1, 1, 1, 1, 2, 4]
+res = get_occurrences(nums, 4)
+print(res)
+                    </code></pre>
+                </div>
+                <div id="exercise-1">
+                    <h2>Exercise 2</h2>
+                    <p>
+                        Write a function to sort a list of numbers, whose elements are less than or equal to n - 1,
+                        using the list of occurrences given by the occurrences function.
+                    </p>
+                    <p>example_1: IN: [0, 2, 1], 2; OUT: [0, 1, 2]</p>
+                    <p>example_2: IN: [1, 1, 4, 3, 0], 4; OUT: [0, 1, 1, 3, 4]</p>
+                    <pre class="blur"><code class="python">
+def counting_sort(nums, n):
+    """Write a function to sort a list of numbers, 
+    whose elements are less than or equal to n - 1, 
+    using the list of occurrences given by the occurrences function"""
+    sorted_nums = []
+    occurrences = get_occurrences(nums, n)
+    for k in range(n):
+        for i in range(occurrences[k]):
+            sorted_nums.append(k)
+    return sorted_nums
+
+
+nums = [1, 1, 2, 4, 1, 0]
+res = counting_sort(nums, 5)
+print(res)
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 3</h2>
+                    <p>
+                        Write a function to test the counting_sort function on a list of 20 integers less than or equal
+                        to 5, chosen randomly.
+                    </p>
+                    <pre class="blur"><code class="python">
+def test_random_list():
+    """ Write a function to test the counting_sort function 
+    on a list of 20 integers less than or equal to 5, chosen randomly. """
+
+    import random
+    nums = []
+    for i in range(20):
+        nums.append(random.randint(0, 5))
+    print(nums)
+    print(counting_sort(nums, 6))
+
+
+test_random_list()
+                    </code></pre>
+                </div>
+                <div>
+                    <h2>Exercise 4</h2>
+                    <p>What is the complexity of this counting sort algorithm?</p>
+                    <p>
+                        The counting sort runs in O(n) time, making it asymptotically faster than other sorting
+                        algorithms like quicksort or merge sort.
+                    </p>
+                </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Time Complexity Exercises</summary>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>What is the time complexity of the following algorithm?</p>
+                    <pre><code class="python">
+def test_is_there (nums):
+    if 2 in nums:
+        print ("it is there")
+    else:
+        print("it is not there")
+                    </code></pre>
+                    <p class="blur">The time complexity is O(n)</p>
+                </div>
+                <div>
+                    <h2>Exercise 2</h2>
+                    <p>What is the time complexity of the foo function?</p>
+                    <pre><code class="python">
+def foo(a, nums) :
+    if a == 0:
+        print ( "a is zero" )
+    else :
+        nums.remove ( a )
+                    </code></pre>
+                    <p class="blur">
+                        In the best case the time complexity is O(1). In the worst case the time complexity is O(n).
+                    </p>
+                </div>
+                <div>
+                    <h2>Exercise 3</h2>
+                    <p>What is the time complexity of the bar function?</p>
+                    <pre><code class="python">
+def bar() :
+    for i in range (11) :
+        print(i * n)
+                    </code></pre>
+                    <p class="blur">The time complexity of bar function is O(1) because 11 is small value.</p>
+                </div>
+                <div>
+                    <h2>Exercise 4</h2>
+                    <p>What is the time complexity of the foo function?</p>
+                    <pre><code class="python">
+def foo(n) :
+    for i in range (n) :
+        for j in range (n) :
+                print(i ∗ j)
+                    </code></pre>
+                    <p class="blur">The function time complexity is O(n^2).</p>
+                </div>
+
+                <div>
+                    <h2>Exercise 5</h2>
+                    <p>What is the time complexity of the foo function?</p>
+                    <pre><code class="python">
+def foo(n) :
+    for i in range (n) :
+        for j in range (i) :
+                print(i ∗ j)
+                    </code></pre>
+                    <p class="blur">The function time complexity is O(n^2).</p>
+                </div>
+
+                <div>
+                    <h2>Exercise 6</h2>
+                    <p>What is the time complexity of the foo function?</p>
+                    <pre><code class="python">
+def foo(n) :
+    for i in range (5, n - 4) :
+        for j in range (i - 5, i + 6) :
+                print(x+2)  
+                    </code></pre>
+                    <p class="blur">The function time complexity is O(n).</p>
+                </div>
+
+                <div>
+                    <h2>Exercise 7</h2>
+                    <p>What is the time complexity of the foo function?</p>
+                    <pre><code class="python">
+def foo(n) :
+    for i in range (1, n + 1) :
+        for j in range (1, i + 1):
+                for k in range (1, j + 1):
+                        print(x) 
+                    </code></pre>
+                    <p class="blur">The function time complexity is O(n^3).</p>
+                </div>
+
+                <div>
+                    <h2>Exercise 8</h2>
+                    <p>Rank the following functions in ascending order of their asymptotic value:</p>
+                    <img src="./images/ex5.png" alt="" /><br />
+                    <img class="blur" src="./images/ex5-sol.png" alt="" />
+                </div>
+            </details>
+        </article>
+    </body>
+    <script>
+        hljs.highlightAll();
+    </script>
+</html>
+
+<!-- http://www.btechsmartclass.com/data_structures/tree-terminology.html -->
+

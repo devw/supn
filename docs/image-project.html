@@ -15,10 +15,50 @@
         <article id="introduction">
             <details>
                 <summary>Introduction</summary>
+                <p>
+                    For grayscale images (https://picsum.photos/id/111/150/100?grayscale), pixel values are integers
+                    that range from 0 (black) to 255 (white).
+                </p>
+                <img class="w-500" src="./images/photopea.png" alt="" />
+                <p>Here is an example of python code that displays the pixel values of a grayscale image.</p>
+                <pre><code class="python">
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/id/111/150/100?grayscale"
+img = Image.open(requests.get(url, stream=True).raw)
+
+[w, h] = img.size
+for i in range(0, w):
+    for j in range(0, h):
+        point = (i, j)
+        px = img.getpixel(point)
+        print(point, px)
+                </code></pre>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Image processing</summary>
+                <p>
+                    How can we tell if an image is too dark or too bright? The obvious answer is that we can simply look
+                    at the image. But we would like a more objective way of answering this question. Moreover, we are
+                    also interested in a method enabling a computer to automatically assess whether an image is too
+                    dark, too bright or has too low a contrast, and automatically correct the image using gray-level
+                    mapping. To this end we introduce a simple but powerful tool namely the image histogram. Everybody
+                    processing images should always look at the histogram of an image before processing it—and so should
+                    you!
+                </p>
+                <img class="w-500" src="./images/image-processing.png" alt="" />
+            </details>
+        </article>
+        <article id="task">
+            <details>
+                <summary>Improve the visual quality of images</summary>
                 <div>
-                    <h2>IT solution to improve the visual quality of images</h2>
+                    <h2>Write a python program to improve the visual quality of images</h2>
                     <ul>
-                        <li>Display the sorting of the different colors present in the image</li>
+                        <li>Display the list of colours that are used in the image via an histogram.</li>
                         <li>Increase the brightness of the image and show the result before and after</li>
                         <li>Decrease the brightness of the image and show the result before and after</li>
                         <li>Increase image contrast by histogram dilation and display the result before and after</li>
@@ -31,12 +71,40 @@
                         the levels of gray of the image pixels.
                     </p>
                     <p>
-                        To do the histogram dilation, just apply the affine transformation x — 256s(x—imin)/(imax—imin)
+                        To do the histogram dilation, just apply the affine transformation 256 * (x - min) / (max - min)
                         at each pixel x of the image, rounding to the nearest integer and replacing negative values with
-                        0 and values greater than 256 with 255. imin being the minimum gray level and imax the maximum
-                        gray level found in the image.
+                        0 and values greater than 256 with 255 (min being the minimum gray level and max the maximum
+                        gray level found in the image).
                     </p>
                 </div>
+            </details>
+        </article>
+        <article>
+            <details>
+                <summary>Image histogram</summary>
+                <p>Write a progrom to display the list of colours that are used in the image via an histogram</p>
+                <pre class="blur"><code class="image">
+import matplotlib.pyplot as plt
+from PIL import Image
+import requests
+
+url = "https://picsum.photos/id/111/150/100?grayscale"
+img = Image.open(requests.get(url, stream=True).raw)
+
+[w, h] = img.size
+pxs = []
+for i in range(0, w):
+    for j in range(0, h):
+        point = (i, j)
+        px = img.getpixel(point)
+        pxs.append(px)
+
+print(pxs, min(pxs), max(pxs))
+plt.xlabel('values')
+plt.ylabel('frequency')
+plt.hist(pxs, 50)
+plt.show()
+                </code></pre>
             </details>
         </article>
     </body>
