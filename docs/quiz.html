@@ -109,7 +109,10 @@ def test_is_there (nums):
     else:
         print("it is not there")
                     </code></pre>
-                    <p class="blur">The time complexity is O(n)</p>
+                    <p class="blur">
+                        The time complexity is O(n) because the line (if 2 in nums) traverses through 0(zero) to the
+                        length of the list nums.
+                    </p>
                 </div>
                 <div>
                     <h2>Exercise 2</h2>
@@ -122,7 +125,9 @@ def foo(a, nums) :
         nums.remove ( a )
                     </code></pre>
                     <p class="blur">
-                        In the best case the time complexity is O(1). In the worst case the time complexity is O(n).
+                        In the best case the time complexity is O(1). In the average/worst case the time complexity is
+                        O(n) because the time complexity of the remove() method is O(N), where N is the size of the
+                        list.
                     </p>
                 </div>
                 <div>
@@ -133,7 +138,7 @@ def bar() :
     for i in range (11) :
         print(i * n)
                     </code></pre>
-                    <p class="blur">The time complexity of bar function is O(1) because 11 is small value.</p>
+                    <p class="blur">The time complexity of bar function is O(1) because 11 constant.</p>
                 </div>
                 <div>
                     <h2>Exercise 4</h2>
@@ -144,7 +149,9 @@ def foo(n) :
         for j in range (n) :
                 print(i ∗ j)
                     </code></pre>
-                    <p class="blur">The function time complexity is O(n^2).</p>
+                    <p class="blur">
+                        The function time complexity is O(n^2) because both indexes (i and j) range from 0 to n.
+                    </p>
                 </div>
 
                 <div>
@@ -156,7 +163,9 @@ def foo(n) :
         for j in range (i) :
                 print(i ∗ j)
                     </code></pre>
-                    <p class="blur">The function time complexity is O(n^2).</p>
+                    <p class="blur">
+                        The function time complexity is O(n^2) because both indexes (i and j) can range from 0 to n.
+                    </p>
                 </div>
 
                 <div>
@@ -168,7 +177,10 @@ def foo(n) :
         for j in range (i - 5, i + 6) :
                 print(x+2)  
                     </code></pre>
-                    <p class="blur">The function time complexity is O(n).</p>
+                    <p class="blur">
+                        The function time complexity is O(n) because the index j range between i - 5 and i + 6 and the
+                        size of a such array is 11 for any value of i.
+                    </p>
                 </div>
 
                 <div>

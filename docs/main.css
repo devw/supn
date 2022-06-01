@@ -23,8 +23,8 @@ pre {
     font-size: 1.3em;
 }
 img.blur {
-    filter: blur(1.9rem);
-    user-select: none;
+    /* filter: blur(1.9rem);
+    user-select: none; */
 }
 
 img.size-l {
@@ -40,8 +40,8 @@ img.w-500 {
 }
 p.blur,
 pre.blur {
-    filter: blur(0.3rem);
-    user-select: none;
+    /* filter: blur(0.3rem);
+    user-select: none; */
 }
 
 table {
